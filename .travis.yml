@@ -1,0 +1,31 @@
+language: node_js
+
+services:
+  - docker
+
+node_js:
+  - 10
+
+install:
+  - npm install -g surge
+  - npm install
+  - docker pull yashkumarverma/shatabdi-express
+  - docker pull yashkumarverma/shatabdi-express-rewrites
+
+script:
+  # start shatabdi server for benchmarks
+  - echo "Running Shatabdi Server"
+  - docker run -d -p 3000:3000 yashkumarverma/shatabdi-express
+  - ./node_modules/artillery/bin/artillery run -q -o shatabdi.json test.yml
+  - ./node_modules/artillery/bin/artillery report -o results/shatabdi.html shatabdi.json
+  - npm run containers:stop
+
+  # now run express server
+  - echo "Running Express Server"
+  - docker run -d -p 3000:3000 yashkumarverma/shatabdi-express-rewrites
+  - ./node_modules/artillery/bin/artillery run -q -o express.json test.yml
+  - ./node_modules/artillery/bin/artillery report -o results/express.html express.json
+  - npm run containers:stop
+
+after_success:
+  - surge --project ./results --domain shatabdi-express-benchmark.surge.sh

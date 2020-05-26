@@ -1,0 +1,25 @@
+{
+  "name": "shatabdi-express-performance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "artillery": "^1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "containers:list": "docker image list",
+    "containers:stop": "docker stop $(docker ps -a -q)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YashKumarVerma/shatabdi-express-performance.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YashKumarVerma/shatabdi-express-performance/issues"
+  },
+  "homepage": "https://github.com/YashKumarVerma/shatabdi-express-performance#readme"
+}

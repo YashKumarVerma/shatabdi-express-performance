@@ -1,0 +1,18 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 5
+      arrivalRate: 100
+      name: "SHORT-RUN: 100 requests for 10 seconds"
+
+    - duration: 120
+      arrivalRate: 30
+      name: "LONG-RUN: 30 requests for 120 seconds"
+
+  defaults:
+    headers:
+      x-my-service-auth: "987401838271002188298567"
+scenarios:
+  - flow:
+      - get:
+          url: "/"
