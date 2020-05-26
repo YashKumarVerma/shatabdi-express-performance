@@ -2,16 +2,24 @@ config:
   target: "http://localhost:3000"
   phases:
     - duration: 5
+      arrivalRate: 200
+      name: "DASH-RUN: 200 requests for 5 seconds"
+
+    - duration: 10
       arrivalRate: 100
       name: "SHORT-RUN: 100 requests for 10 seconds"
 
-    - duration: 120
-      arrivalRate: 30
-      name: "LONG-RUN: 30 requests for 120 seconds"
+    - duration: 60
+      arrivalRate: 40
+      name: "PACE-RUN: 40 requests for 60 seconds"
+
+    - duration: 240
+      arrivalRate: 20
+      name: "MARATHON: 20 requests for 240 seconds"
 
   defaults:
     headers:
-      x-my-service-auth: "987401838271002188298567"
+      x-author: "yashkumarverma"
 scenarios:
   - flow:
       - get:
